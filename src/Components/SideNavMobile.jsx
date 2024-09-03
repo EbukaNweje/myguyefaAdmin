@@ -118,7 +118,7 @@ const SideNavMobile = () => {
                             </NavLink>
                         </div>
                     </div> */}
-                    {/* <NavLink
+                    <NavLink
                         to={"/admin/dashboard/manageusers"}
                         className={({isActive}) =>
                             !isActive
@@ -130,7 +130,7 @@ const SideNavMobile = () => {
                             <FaUserCircle className="w-5 h-5" />
                             <p className="">Manage Users</p>
                         </div>
-                    </NavLink> */}
+                    </NavLink>
                     <NavLink
                         to={"/admin/dashboard/manage-deposits"}
                         className={({isActive}) =>
