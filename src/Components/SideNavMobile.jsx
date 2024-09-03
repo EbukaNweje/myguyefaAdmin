@@ -158,6 +158,13 @@ const SideNavMobile = () => {
                             <p className="">Manage Withdrawal</p>
                         </div>
                     </NavLink>
+
+                    <NavLink  to={"/adminlogin/login"}>
+                        <div className="w-full h-12 text-sm cursor-pointer hover:text-[0.90rem] transition-all rounded-md flex items-center gap-4 font-bold px-2 text-[#a00000] ">
+                        <p className="">LogOut</p>
+                       </div>
+                    </NavLink>
+                    
                     {/* <NavLink
                         to={"/admin/dashboard/kyc-applications"}
                         className={({isActive}) =>
