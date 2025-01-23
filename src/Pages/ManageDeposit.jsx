@@ -8,7 +8,7 @@ const ManageDeposit = () => {
     const [userData, setUserData] = useState([]);
 
     const acceptDeposit = (depositId) => {
-        const url = `https://my-guy-efa-back-end.vercel.app/api/confirm-deposit/${depositId}`;
+        const url = `https://my-guy-efa-back-end-beryl.vercel.app/api/confirm-deposit/${depositId}`;
         axios.post(url)
             .then((response) => {
                 console.log(response.data.message);
@@ -21,7 +21,7 @@ const ManageDeposit = () => {
     };
 
     const getallDeposit = () => {
-        const url = "https://my-guy-efa-back-end.vercel.app/api/alldeposit";
+        const url = "https://my-guy-efa-back-end-beryl.vercel.app/api/alldeposit";
         axios.get(url)
             .then((response) => {
                 console.log(response.data);
@@ -136,7 +136,7 @@ const ManageDeposit = () => {
                                 userData.map((props)=> (
                                     <div className="w-full phone:w-max h-16 items-center justify-between flex border-b border-b-gray-200 font-semibold text-[rgb(33,37,41)]" key={props._id}>
                                     <div className="w-24 phone:w-36 h-max" style={{color: props?.user === null ? "red": "black"}}>
-                                        { props?.user === null ? "Deleted User" : props?.user.fullName}  
+                                        { props?.user === null ? "Deleted User" : props?.user.userName}  
                                     </div>
                                     <div className="w-36 phone:w-48 h-max">{props.amount}</div>
                                     <div className="w-36 h-max">{props.coin}</div>

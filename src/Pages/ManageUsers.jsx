@@ -20,7 +20,7 @@ const ManageUsers = () => {
     const [showIcon, setShowIcon] = useState(true);
 
     const getAllUserData = () => {
-        const url = "https://my-guy-efa-back-end.vercel.app/api/alluserdata";
+        const url = "https://my-guy-efa-back-end-beryl.vercel.app/api/alluserdata";
         axios
             .get(url)
             .then((response) => {
@@ -84,7 +84,7 @@ const ManageUsers = () => {
           email: email,
         };
 
-        fetch('https://my-guy-efabackend.onrender.com/api/adminAproveEmailSand', {
+        fetch('https://my-guy-efa-back-end-beryl.vercel.app/api/adminAproveEmailSand', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ const ManageUsers = () => {
 
 
     const Verify = (id) => { 
-            const url = `https://my-guy-efabackend.onrender.com/api/UserVerify/${id}`;
+            const url = `https://my-guy-efa-back-end-beryl.vercel.app/api/UserVerify/${id}`;
             axios.patch(url)
                 .then((response) => {
                     console.log(response.data.data.email);
@@ -122,7 +122,7 @@ const ManageUsers = () => {
     return (
         <>
             <div className="w-full h-max px-6 py-10 flex flex-col gap-2 phone:gap-8 bg-[#f9fbfd] text-[rgb(87,89,98)]">
-                <p className="text-[27px] font-semibold">Bitminers-Coinstarpro users list</p>
+                <p className="text-[27px] font-semibold">Fininvestohub users list</p>
                 <div className="w-full h-max px-6 py-5 bg-white">
                     <div className="full">
                         <div className="w-full h-14 flex items-center justify-between border-b-2 border-b-gray-200 px-5">
@@ -197,7 +197,7 @@ const ManageUsers = () => {
                                             />
                                         </div>
                                         <div className="w-32  h-full flex items-center  ">
-                                            <p>{item?.fullName}</p>
+                                            <p>{item?.firstName} {item.lastName}</p>
                                         </div>
                                         <div className="w-32 h-full flex items-center ">
                                             <p>{item?.userName}</p>

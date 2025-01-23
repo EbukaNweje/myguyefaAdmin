@@ -158,7 +158,7 @@ const SideNav = () => {
                             <p className="">Manage Withdrawal</p>
                         </div>
                     </NavLink>
-                    {/* <NavLink
+                    <NavLink
                         to={"/admin/dashboard/kyc-applications"}
                         className={({isActive}) =>
                             !isActive
@@ -166,11 +166,11 @@ const SideNav = () => {
                                 : "transition-all bg-[#0e4152] hover:bg-[#0e4152] text-white"
                         }
                     >
-                        <div className="w-full h-12 text-sm cursor-pointer hover:text-[0.90rem] transition-all  rounded-md flex items-center gap-4 font-bold px-2 ">
+                        {/* <div className="w-full h-12 text-sm cursor-pointer hover:text-[0.90rem] transition-all  rounded-md flex items-center gap-4 font-bold px-2 ">
                             <FaUserCheck className="w-5 h-5" />
                             <p className="">KYC Application(s)</p>
-                        </div>
-                    </NavLink> */}
+                        </div> */}
+                    </NavLink>
                     {/* <div className="w-full h-max flex flex-col gap-2 ">
                         <div
                             className="w-full h-12 flex text-sm transition-all  cursor-pointer items-center justify-between text-[#777777]"
@@ -249,7 +249,7 @@ const SideNav = () => {
                             </NavLink>
                         </div>
                     </div> */}
-                    {/* <div className="w-full h-max flex flex-col gap-2 ">
+                    <div className="w-full h-max flex flex-col gap-2 ">
                         <div
                             className="w-full h-12 text-sm flex cursor-pointer transition-all  items-center justify-between text-[#777777]"
                             onClick={handleDropAdmin}
@@ -283,7 +283,7 @@ const SideNav = () => {
                             >
                                 <div className="w-full  h-12 flex gap-2 items-center px-4">
                                     <span className="w-1 h-1 rounded-full bg-[#777777]"></span>
-                                    <p className="">Add Manager</p>
+                                    <p className="">Manager Wallet</p>
                                 </div>
                             </NavLink>
                             <NavLink
@@ -296,11 +296,11 @@ const SideNav = () => {
                             >
                                 <div className="w-full h-12  flex gap-2 items-center px-4">
                                     <span className="w-1 h-1 rounded-full bg-[#777777]"></span>
-                                    <p className="">Manage Admin(s)</p>
+                                    <p className="">Add Admin Wallet(s)</p>
                                 </div>
                             </NavLink>
                         </div>
-                    </div> */}
+                    </div>
                     {/* <div className="w-full h-max flex flex-col gap-2 ">
                         <div
                             className="w-full h-12 text-sm flex cursor-pointer transition-all  items-center justify-between text-[#777777]"

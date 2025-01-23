@@ -10,13 +10,13 @@ const Header = ({sideBar}) => {
                     <IoMdMenu className="cursor-pointer  text-white hidden phone:block w-8 h-10" onClick={sideBar}/>
 
                     <p className="text-[1.70rem] text-white phone:hidden">
-                        Bitminers-Coinstarpro 
+                        Fininvestohub 
                     </p>
 
                     <IoMdMenu className="cursor-pointer w-7 h-7 text-white phone:hidden" />
                 </div>
                 <div className="w-[84%] h-full flex justify-between  items-center px-8">
-                    <p className="text-[1.70rem] text-white w-[80%] phone:flex justify-center hidden">Bitminers-Coinstarpro</p>
+                    <p className="text-[1.70rem] text-white w-[80%] phone:flex justify-center hidden">Fininvestohub</p>
 
                     <div className="flex items-center h-10 w-96 bg-[#0c3846] rounded text-white phone:hidden">
                         <FaSearch className="w-10 h-6 cursor-pointer" />

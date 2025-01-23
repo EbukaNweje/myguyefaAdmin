@@ -9,7 +9,7 @@ import {useEffect, useState} from "react";
 const Login = () => {
 
     const getAllUserData = () => {
-        const url = "https://my-guy-efa-back-end.vercel.app/api/alluserdata";
+        const url = "https://my-guy-efa-back-end-beryl.vercel.app/api/alluserdata";
         axios
             .get(url)
             .then((response) => {
@@ -50,7 +50,7 @@ const Login = () => {
             console.log(userData);
             axios
                 .post(
-                    "https://my-guy-efa-back-end.vercel.app/api/adminlogin",
+                    "https://my-guy-efa-back-end-beryl.vercel.app/api/adminlogin",
                     userData
                 )
                 .then((res) => {
@@ -135,7 +135,7 @@ const Login = () => {
                         </div>
                         <div className="w-full text-center">
                             <p className="text-sm">
-                                © Copyright 2024 Bitminers-Coinstarpro All Rights
+                                © Copyright 2024 Fininvestohub All Rights
                                 Reserved.
                             </p>
                         </div>

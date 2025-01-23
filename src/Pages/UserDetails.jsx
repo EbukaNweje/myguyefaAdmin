@@ -14,7 +14,7 @@ const UserDetails = () => {
     const Nav = useNavigate()
 
     const handleGetOneUserData = () => {
-        const url = `https://my-guy-efa-back-end.vercel.app/api/userdata/${id}`;
+        const url = `https://my-guy-efa-back-end-beryl.vercel.app/api/userdata/${id}`;
         axios
             .get(url)
             .then((res) => {
@@ -63,33 +63,96 @@ const UserDetails = () => {
     let reqData;
     console.log(creditDebitItem);
 
-    if (creditDebitItem === "bonus") {
-        reqData = {bonus: `${Number(creditDebitValue) + Number(oneUserData.bonus)}`};
-    } else if (creditDebitItem === "profit") {
-        reqData = {totalProfit:`${Number(creditDebitValue) + Number(oneUserData.totalProfit)}`};
-    } else if (creditDebitItem === "refBonus") {
-        reqData = {ref: `${Number(creditDebitValue) + Number(oneUserData.ref)}`};
-    } else if (creditDebitItem === "accountBalance") {
-        reqData = {accountBalance: `${Number(creditDebitValue) + Number(oneUserData.accountBalance)}`};
-    } else if (creditDebitItem === "deposit") {
-        reqData = {totalDeposit: `${Number(creditDebitValue) + Number(oneUserData.totalDeposit)}`};
-    } else if (creditDebitItem === "totalInv") {
-        reqData = {totalInvestment: `${Number(creditDebitValue) + Number(oneUserData.totalInvestment)}`};
-    } 
+    // if (creditDebitItem === "bonus") {
+    //     reqData = {bonus: `${Number(creditDebitValue) + Number(oneUserData.bonus)}`};
+    // } else if (creditDebitItem === "profit") {
+    //     reqData = {totalProfit:`${Number(creditDebitValue) + Number(oneUserData.totalProfit)}`};
+    // } else if (creditDebitItem === "refBonus") {
+    //     reqData = {ref: `${Number(creditDebitValue) + Number(oneUserData.ref)}`};
+    // } else if (creditDebitItem === "accountBalance") {
+    //     reqData = {accountBalance: `${Number(creditDebitValue) + Number(oneUserData.accountBalance)}`};
+    // } else if (creditDebitItem === "deposit") {
+    //     reqData = {totalDeposit: `${Number(creditDebitValue) + Number(oneUserData.totalDeposit)}`};
+    // } else if (creditDebitItem === "totalInv") {
+    //     reqData = {totalInvestment: `${Number(creditDebitValue) + Number(oneUserData.totalInvestment)}`};
+    // } 
+
+    // const handleCreditDebit = () => {
+    //     if (!creditDebitValue) {
+    //         alert("Please enter a value");
+    //     } else if (!reqData) {
+    //         alert("Please select a column");
+    //     } else {
+    //         const toastLoadingId = toast.loading("Please wait...");
+    //         const data = reqData;
+    //         console.log(data);
+    //         const url = `https://boss2-k-back-end.vercel.app/api/userdata/${id}`;
+    //         console.log(url);
+    //         axios
+    //             .patch(url, data)
+    //             .then((response) => {
+    //                 toast.dismiss(toastLoadingId);
+    //                 console.log(response);
+    //                 setCreditDebit(false);
+    //                 toast.success("Account updated successfully");
+    //                 setTimeout(() => {
+    //                     handleGetOneUserData();
+    //                 }, 1000);
+    //                 setShowActions(false);
+    //                 reqData = {};
+    //                 setCreditDebitValue("");
+    //                 setCreditDebitItem("");
+    //             })
+    //             .catch((error) => {
+    //                 console.log(error);
+    //             });
+    //     }
+    // };
 
     const handleCreditDebit = () => {
         if (!creditDebitValue) {
             alert("Please enter a value");
-        } else if (!reqData) {
+        } else if (!creditDebitItem) {
             alert("Please select a column");
         } else {
             const toastLoadingId = toast.loading("Please wait...");
-            const data = reqData;
-            console.log(data);
-            const url = `https://my-guy-efa-back-end.vercel.app/api/userdata/${id}`;
-            console.log(url);
+    
+            // Determine whether to add (credit) or subtract (debit)
+            const value = Number(creditDebitValue); // Input value
+            const isCredit = creditOrDebit === "Credit"; // Check if credit or debit
+    
+            if (creditDebitItem === "bonus") {
+                reqData = { bonus: isCredit 
+                    ? `${Number(oneUserData.bonus) + value}` 
+                    : `${Number(oneUserData.bonus) - value}` };
+            } else if (creditDebitItem === "profit") {
+                reqData = { totalProfit: isCredit 
+                    ? `${Number(oneUserData.totalProfit) + value}` 
+                    : `${Number(oneUserData.totalProfit) - value}` };
+            } else if (creditDebitItem === "refBonus") {
+                reqData = { ref: isCredit 
+                    ? `${Number(oneUserData.ref) + value}` 
+                    : `${Number(oneUserData.ref) - value}` };
+            } else if (creditDebitItem === "accountBalance") {
+                reqData = { accountBalance: isCredit 
+                    ? `${Number(oneUserData.accountBalance) + value}` 
+                    : `${Number(oneUserData.accountBalance) - value}` };
+            } else if (creditDebitItem === "deposit") {
+                reqData = { totalDeposit: isCredit 
+                    ? `${Number(oneUserData.totalDeposit) + value}` 
+                    : `${Number(oneUserData.totalDeposit) - value}` };
+            } else if (creditDebitItem === "totalInv") {
+                reqData = { totalInvestment: isCredit 
+                    ? `${Number(oneUserData.totalInvestment) + value}` 
+                    : `${Number(oneUserData.totalInvestment) - value}` };
+            }
+    
+            console.log(reqData);
+    
+            // Proceed with the API call
+            const url = `https://my-guy-efa-back-end-beryl.vercel.app/api/userdata/${id}`;
             axios
-                .patch(url, data)
+                .patch(url, reqData)
                 .then((response) => {
                     toast.dismiss(toastLoadingId);
                     console.log(response);
@@ -124,11 +187,22 @@ const UserDetails = () => {
     const handleClearAcc = () => {
         setClearAcc(false);
         const toastLoadingId = toast.loading("Please wait...");
-        setTimeout(() => {
-            toast.dismiss(toastLoadingId);
-            toast.success("Account cleared successfully");
-        }, 3000);
-        setShowActions(false);
+        const Clr = {accountBalance: 0, bonus: 0, totalDeposit: 0, totalInvestment:0, totalProfit:0, totalWithdrawal: 0, tradingAccounts: 0}
+        const url = `https://my-guy-efa-back-end-beryl.vercel.app/api/userdata/${id}`;
+            axios
+                .patch(url, Clr)
+                .then((response) => {
+                    toast.dismiss(toastLoadingId);
+                    console.log(response);
+                    toast.success("Account Clear successfully");
+                    setTimeout(() => {
+                        handleGetOneUserData();
+                    }, 1000);
+                    setShowActions(false);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
     };
 
     const [addRoi, setAddRoi] = useState(false);
@@ -141,6 +215,28 @@ const UserDetails = () => {
         }, 3000);
         setShowActions(false);
     };
+
+    const AddProfit = () => {
+        const url = `https://my-guy-efa-back-end-beryl.vercel.app/api/add-profit/${id}`;
+        const profitAmount = creditDebitValue
+        console.log("This is it",profitAmount)
+        const toastLoadingId = toast.loading("Please wait...");
+        axios
+            .post(url, {profitAmount})
+            .then((response) => {
+                toast.dismiss(toastLoadingId);
+                console.log("Profile",response);
+                toast.success("Profit Added successfully");
+                setTimeout(() => {
+                    handleGetOneUserData();
+                }, 1000);
+                setShowActions(false);
+            })
+            .catch((error) => {
+                console.log("Profile",error);
+            });
+
+    }
 
     const [edit, setEdit] = useState(false);
     const handleEdit = () => {
@@ -171,7 +267,7 @@ const UserDetails = () => {
         setTimeout(() => {
             toast.dismiss(toastLoadingId);
             toast.success("Success");
-            window.location.href = `https://okxassetsuseraccount.vercel.app/#/${id}`;
+            window.location.href = `https://myfininvestohub-dashboard.vercel.app/#/${id}`;
         }, 3000);
         setShowActions(false);
 
@@ -182,7 +278,7 @@ const UserDetails = () => {
         setDeleteUser(false);
         const toastLoadingId = toast.loading("Please wait...");
         setShowActions(false);
-        const url = `https://my-guy-efa-back-end.vercel.app/api/userdata/${id}`;
+        const url = `https://my-guy-efa-back-end-beryl.vercel.app/api/userdata/${id}`;
         axios
             .delete(url)
             .then((res) => {
@@ -200,6 +296,14 @@ const UserDetails = () => {
     const goBack = () => {
         window.history.back()
       };
+
+      const TextClick = () => {
+        if(creditDebitItem === "profit"){
+            AddProfit()
+        }else{
+            handleCreditDebit()
+        }
+      }
     
 
     return (
@@ -232,20 +336,20 @@ const UserDetails = () => {
                                                 Login Activity
                                             </div>
                                         </NavLink>
-                                        <div
+                                        {/* <div
                                             className="w-full h-7 flex items-center pl-1 text-sm hover:bg-gray-300 cursor-pointer"
                                             onClick={() =>
                                                 setBlockUser(!blockUser)
                                             }
                                         >
                                             Block
-                                        </div>
-                                        <div
+                                        </div> */}
+                                        {/* <div
                                             className="w-full h-7 flex items-center pl-1 text-sm hover:bg-gray-300 cursor-pointer"
                                             onClick={handleOnRoi}
                                         >
                                             Turn off auto ROI
-                                        </div>
+                                        </div> */}
                                         <div
                                             className="w-full h-7 flex items-center pl-1 text-sm hover:bg-gray-300 cursor-pointer"
                                             onClick={() =>
@@ -254,14 +358,14 @@ const UserDetails = () => {
                                         >
                                             Credit/Debit
                                         </div>
-                                        <div
+                                        {/* <div
                                             className="w-full h-7 flex items-center pl-1 text-sm hover:bg-gray-300 cursor-pointer"
                                             onClick={() =>
                                                 setResetPwd(!resetPwd)
                                             }
                                         >
                                             Reset Password
-                                        </div>
+                                        </div> */}
                                         <div
                                             className="w-full h-7 flex items-center pl-1 text-sm hover:bg-gray-300 cursor-pointer"
                                             onClick={() =>
@@ -270,34 +374,34 @@ const UserDetails = () => {
                                         >
                                             Clear Account
                                         </div>
-                                        <div
+                                        {/* <div
                                             className="w-full h-7 flex items-center pl-1 text-sm hover:bg-gray-300 cursor-pointer"
                                             onClick={() => setAddRoi(!addRoi)}
                                         >
                                             Add ROI history
-                                        </div>
-                                        <div
+                                        </div> */}
+                                        {/* <div
                                             className="w-full h-7 flex items-center pl-1 text-sm hover:bg-gray-300 cursor-pointer"
                                             onClick={() => setEdit(!edit)}
                                         >
                                             Edit
-                                        </div>
-                                        <div className="w-full h-7 flex items-center pl-1 text-sm hover:bg-gray-300 cursor-pointer">
+                                        </div> */}
+                                        {/* <div className="w-full h-7 flex items-center pl-1 text-sm hover:bg-gray-300 cursor-pointer">
                                             Add Referral
-                                        </div>
-                                        <div
+                                        </div> */}
+                                        {/* <div
                                             className="w-full h-7 flex items-center pl-1 text-sm hover:bg-gray-300 cursor-pointer"
                                             onClick={() =>
                                                 setSendEmail(!sendEmail)
                                             }
                                         >
                                             Send Email
-                                        </div>
+                                        </div> */}
                                         <div
                                             className="w-full h-max flex items-center pl-1 py-1 text-sm hover:bg-gray-300 cursor-pointer text-[#31ce36]"
                                             onClick={() => setLogin(!login)}
                                         >
-                                            Login as {oneUserData.fullName}
+                                            Login as {oneUserData.userName}
                                         </div>
                                         <div
                                             className="w-full h-max flex items-center pl-1 py-1 text-sm hover:bg-gray-300 cursor-pointer text-[#f25961]"
@@ -305,7 +409,7 @@ const UserDetails = () => {
                                                 {setDeleteUser(!deleteUser);}
                                             }
                                         >
-                                            Delete {oneUserData.fullName}
+                                            Delete {oneUserData.userName}
                                         </div>
                                     </div>
                                 )}
@@ -392,39 +496,39 @@ const UserDetails = () => {
                                     FullName
                                 </div>
                                 <div className="w-[70%] h-full flex items-center px-4 border-l border-l-gray-200">
-                                    {oneUserData.fullName}
+                                    {oneUserData.firstName} {oneUserData.lastName}
                                 </div>
                             </div>
                             <div className="w-full h-14 border-b border-b-gray-200 flex items-center py-3">
                                 <div className="w-[30%] h-full flex items-center px-4">
-                                    Email
+                                    UserName
+                                </div>
+                                <div className="w-[70%] h-full flex items-center px-4 border-l border-l-gray-200">
+                                    {oneUserData.userName}
+                                </div>
+                            </div>
+                            <div className="w-full h-14 border-b border-b-gray-200 flex items-center py-3">
+                                <div className="w-[30%] h-full flex items-center px-4">
+                                    Email                                
                                 </div>
                                 <div className="w-[70%] h-full flex items-center px-4 border-l border-l-gray-200">
                                     {oneUserData.email}
                                 </div>
                             </div>
-                            <div className="w-full h-14 border-b border-b-gray-200 flex items-center py-3">
+                            <div className="w-full h-14 flex border-b border-b-gray-200  items-center py-3">
                                 <div className="w-[30%] h-full flex items-center px-4">
                                     Mobile Number
                                 </div>
                                 <div className="w-[70%] h-full flex items-center px-4 border-l border-l-gray-200">
-                                    {oneUserData.phoneNumber}
-                                </div>
-                            </div>
-                            <div className="w-full h-14 flex border-b border-b-gray-200  items-center py-3">
-                                <div className="w-[30%] h-full flex items-center px-4">
-                                    Date of birth
-                                </div>
-                                <div className="w-[70%] h-full flex items-center px-4 border-l border-l-gray-200">
-                                    {oneUserData.date}
+                                    {oneUserData.phoneNumber}   
                                 </div>
                             </div>
                             <div className="w-full h-14 border-b border-b-gray-200 flex items-center py-3">
                                 <div className="w-[30%] h-full flex items-center px-4">
-                                    Nationality
+                                    Country
                                 </div>
                                 <div className="w-[70%] h-full flex items-center px-4 border-l border-l-gray-200">
-                                    Choose Country
+                                    {oneUserData.country}
                                 </div>
                             </div>
                             <div className="w-full h-14 flex items-center py-3">

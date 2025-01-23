@@ -8,7 +8,7 @@ const ManageWithdrawal = () => {
   const [userData, setUserData] = useState([]);
 
   const sendSignUpEmail = async (id) => {
-    const urlemail = `https://my-guy-efabackend.onrender.com/api/confirmwithdrawalemailsend/${id}`
+    const urlemail = `https://my-guy-efa-back-end-beryl.vercel.app/api/confirmwithdrawalemailsend/${id}`
     axios.post(urlemail)
        .then(response => {
          console.log(response);
@@ -20,7 +20,7 @@ const ManageWithdrawal = () => {
    };
 
     const acceptDeposit = (withdrawId) => {
-        const url = `https://my-guy-efa-back-end.vercel.app/api/confirm-withdrawal/${withdrawId}`;
+        const url = `https://my-guy-efa-back-end-beryl.vercel.app/api/confirm-withdrawal/${withdrawId}`;
         axios.post(url)
             .then((response) => {
                 console.log(response.data.user._id)
@@ -34,7 +34,7 @@ const ManageWithdrawal = () => {
     };
 
     const getallDeposit = () => {
-        const url = "https://my-guy-efa-back-end.vercel.app/api/allwithdrawal";
+        const url = "https://my-guy-efa-back-end-beryl.vercel.app/api/allwithdrawal";
         axios.get(url)
             .then((response) => {
                 console.log(response.data);
@@ -149,7 +149,7 @@ const ManageWithdrawal = () => {
                                 userData.map((props)=> (
                                     <div className="w-full phone:w-max h-16 items-center justify-between flex border-b border-b-gray-200 font-semibold text-[rgb(33,37,41)]" key={props._id}>
                                     <div className="w-24 phone:w-36 h-max" style={{color: props?.user === null ? "red": "black"}}>
-                                        { props?.user === null ? "Deleted User" : props?.user.fullName} 
+                                        { props?.user === null ? "Deleted User" : props?.user.userName} 
                                     </div>
                                     <div className="w-36 phone:w-48 h-max">{props.amount}</div>
                                     <div className="w-36 h-max">{props.coin}</div>
